@@ -28,7 +28,7 @@ export const Content = styled.div`
     margin-top: 30px;
 
     strong {
-      text-align: initial;
+      text-align: left;
       padding: 0 32px;
       font-weight: bold;
       color: #444;
