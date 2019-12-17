@@ -51,7 +51,7 @@ export const Container = styled.div`
 `;
 
 export const Table = styled.table`
-  margin-top: 24px;
+  margin: 24px auto;
   width: 100%;
   border-radius: 4px;
   background: #fff;

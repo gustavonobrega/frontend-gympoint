@@ -9,7 +9,7 @@ import { Container, Table, NoContent } from './styles';
 
 export default function Dashboard() {
   const [studentName, setStudentName] = useState('');
-  const [students, setStudent] = useState([]);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     async function loadStudent() {
@@ -18,7 +18,7 @@ export default function Dashboard() {
           params: { queryName: studentName },
         });
 
-        setStudent(response.data);
+        setStudents(response.data);
       } catch (err) {
         toast.error('Não foi possível carregar os alunos');
       }
@@ -35,6 +35,7 @@ export default function Dashboard() {
       try {
         await api.delete(`/students/${id}`);
 
+        setStudents(students.filter(student => student.id !== id));
         toast.success('Aluno removido com sucesso!');
       } catch (err) {
         toast.error('Erro ao remover o aluno');
