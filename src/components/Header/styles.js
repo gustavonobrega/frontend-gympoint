@@ -35,7 +35,7 @@ export const Content = styled.div`
           color: #999;
         }
 
-        a:active {
+        a.active {
           color: #444;
         }
       }

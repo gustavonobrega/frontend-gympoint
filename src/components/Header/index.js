@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { SignOut } from '~/store/modules/auth/actions';
 
@@ -24,16 +24,16 @@ export default function Header() {
 
           <ul>
             <li>
-              <Link to="/dashboard">ALUNOS</Link>
+              <NavLink to="/dashboard">ALUNOS</NavLink>
             </li>
             <li>
-              <Link to="/plans">PLANOS</Link>
+              <NavLink to="/plans">PLANOS</NavLink>
             </li>
             <li>
-              <Link to="/">MATRÍCULAS</Link>
+              <NavLink to="/registrations">MATRÍCULAS</NavLink>
             </li>
             <li>
-              <Link to="/">PEDIDOS DE AUXÍLIO</Link>
+              <NavLink to="/helporders">PEDIDOS DE AUXÍLIO</NavLink>
             </li>
           </ul>
         </nav>

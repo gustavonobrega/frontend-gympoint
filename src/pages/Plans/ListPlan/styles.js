@@ -94,3 +94,45 @@ export const Table = styled.table`
     }
   }
 `;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+
+  button {
+    height: 35px;
+    padding: 0 16px;
+    margin: 0 10px;
+    border-radius: 4px;
+    color: #ee4d64;
+    font-weight: bold;
+
+    &:hover {
+      background: #ee4d64;
+      color: #ffffff;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+      background: #fff;
+      color: #ee4d64;
+    }
+  }
+`;
+
+export const NoContent = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 50px;
+
+  strong {
+    font-size: 18px;
+    color: #444;
+  }
+`;

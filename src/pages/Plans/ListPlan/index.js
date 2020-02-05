@@ -5,17 +5,21 @@ import { formatPrice } from '~/util/format';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container, Table } from './styles';
+import { Container, Table, Footer, NoContent } from './styles';
 
 export default function ListPlan() {
   const [plans, setPlans] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
   useEffect(() => {
     async function loadPlan() {
       try {
-        const response = await api.get('/plans');
+        const { data } = await api.get('/plans', {
+          params: { page },
+        });
 
-        const data = response.data.map(plan => ({
+        const dataPlans = data.plans.map(plan => ({
           ...plan,
           priceFormatted: formatPrice(plan.price),
           durationFormatted: `${plan.duration} ${
@@ -23,13 +27,14 @@ export default function ListPlan() {
           }`,
         }));
 
-        setPlans(data);
+        setTotalPage(data.lastPage);
+        setPlans(dataPlans);
       } catch (err) {
         toast.error('Não foi possível carregar os planos');
       }
     }
     loadPlan();
-  }, []);
+  }, [page]);
 
   async function handlePlanDelete({ id }) {
     if (window.confirm('Tem certeza que dessa remover este plano ?'))
@@ -43,6 +48,14 @@ export default function ListPlan() {
       }
   }
 
+  function handlePreviousPage() {
+    setPage(page - 1);
+  }
+
+  function handleNextPage() {
+    setPage(page + 1);
+  }
+
   return (
     <Container>
       <header>
@@ -54,35 +67,57 @@ export default function ListPlan() {
         </button>
       </header>
 
-      <Table>
-        <thead>
-          <tr>
-            <th>TÍTULO</th>
-            <th>DURAÇÃO</th>
-            <th>VALOR p/ MÊS</th>
-          </tr>
-        </thead>
-        <tbody>
-          {plans.map(plan => (
-            <tr key={plan.id}>
-              <td>{plan.title}</td>
-              <td>{plan.durationFormatted}</td>
-              <td>{plan.priceFormatted}</td>
-              <td>
-                <button
-                  type="button"
-                  onClick={() => history.push(`/plans/${plan.id}`)}
-                >
-                  editar
-                </button>
-                <button type="button" onClick={() => handlePlanDelete(plan)}>
-                  apagar
-                </button>
-              </td>
+      {plans.length ? (
+        <Table>
+          <thead>
+            <tr>
+              <th>TÍTULO</th>
+              <th>DURAÇÃO</th>
+              <th>VALOR p/ MÊS</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {plans.map(plan => (
+              <tr key={plan.id}>
+                <td>{plan.title}</td>
+                <td>{plan.durationFormatted}</td>
+                <td>{plan.priceFormatted}</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => history.push(`/plans/${plan.id}`)}
+                  >
+                    editar
+                  </button>
+                  <button type="button" onClick={() => handlePlanDelete(plan)}>
+                    apagar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <NoContent>
+          <strong>Nenhum plano encontrado</strong>
+        </NoContent>
+      )}
+      <Footer>
+        <button
+          disabled={page === 1}
+          type="button"
+          onClick={handlePreviousPage}
+        >
+          Anterior
+        </button>
+        <button
+          disabled={page === totalPage}
+          type="button"
+          onClick={handleNextPage}
+        >
+          Próximo
+        </button>
+      </Footer>
     </Container>
   );
 }

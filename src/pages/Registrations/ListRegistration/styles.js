@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1380px;
   margin: 34px auto;
 
   header {
@@ -15,36 +15,21 @@ export const Container = styled.div`
       color: #444;
     }
 
-    div {
+    button {
       display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 36px;
+      width: 142px;
+      border-radius: 4px;
+      background-color: #ee4d64;
+      color: #fff;
+      font-weight: bold;
+      padding: 0 8px;
+      transition: background 0.2s;
 
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        height: 36px;
-        padding: 0 16px;
-        border-radius: 4px;
-        background: #ee4d64;
-        font-weight: bold;
-        color: #fff;
-        transition: background 0.2s;
-
-        &:hover {
-          background: ${darken(0.05, '#ee4d64')};
-        }
-
-        svg {
-          margin-right: 8px;
-        }
-      }
-
-      input {
-        width: 237px;
-        margin-left: 16px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding-left: 20px;
+      &:hover {
+        background: ${darken(0.06, '#ee4d64')};
       }
     }
   }
@@ -53,43 +38,67 @@ export const Container = styled.div`
 export const Table = styled.table`
   margin: 24px auto;
   width: 100%;
-  border-radius: 4px;
   background: #fff;
+  border-radius: 4px;
   padding: 30px;
-  font-size: 16px;
 
   thead th {
     text-align: left;
+    font-size: 16px;
     color: #444;
-    line-height: 20px;
+
+    &:nth-child(2) {
+      text-align: center;
+    }
 
     &:nth-child(3) {
+      text-align: center;
+    }
+
+    &:nth-child(4) {
+      text-align: center;
+    }
+
+    &:nth-child(5) {
       text-align: center;
     }
   }
 
   tbody td {
-    border-bottom: 1px solid #eee;
-    padding: 16px 0;
+    padding: 20px 0 16px;
+    font-size: 16px;
     color: #666;
+    border-bottom: 1px solid #eee;
 
     &:nth-child(1) {
-      width: 400px;
+      width: 313px;
+    }
+
+    &:nth-child(2) {
+      width: 190px;
+      text-align: center;
     }
 
     &:nth-child(3) {
       text-align: center;
     }
 
+    &:nth-child(4) {
+      text-align: center;
+    }
+
+    &:nth-child(5) {
+      text-align: center;
+    }
+
     &:last-child {
-      width: 250px;
       text-align: right;
     }
 
     button {
+      font-size: 15px;
       background: none;
       border: 0;
-      font-size: 16px;
 
       &:first-child {
         color: #4d85ee;
@@ -100,21 +109,6 @@ export const Table = styled.table`
         color: #de3b3b;
       }
     }
-  }
-`;
-
-export const NoContent = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 30px;
-  background: #fff;
-  border-radius: 4px;
-  padding: 50px;
-
-  strong {
-    font-size: 18px;
-    color: #444;
   }
 `;
 
@@ -142,5 +136,20 @@ export const Footer = styled.footer`
       background: #fff;
       color: #ee4d64;
     }
+  }
+`;
+
+export const NoContent = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 50px;
+
+  strong {
+    font-size: 18px;
+    color: #444;
   }
 `;

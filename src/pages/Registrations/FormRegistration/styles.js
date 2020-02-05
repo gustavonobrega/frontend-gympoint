@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import MySelect from '~/components/MySelect';
 
 export const Container = styled.div`
   max-width: 900px;
@@ -10,23 +11,29 @@ export const Container = styled.div`
     flex-direction: column;
     width: 100%;
     margin: 24px auto;
-    background: #fff;
     padding: 10px 30px 30px 30px;
+    background: #fff;
     border-radius: 4px;
 
     strong {
-      color: #444;
       margin-top: 20px;
+      font-size: 16px;
+      color: #444444;
     }
 
     input {
+      padding: 0 13px;
       height: 45px;
-      border: solid 1px #ddd;
+      border: 1px solid #ddd;
       border-radius: 4px;
       margin-top: 8px;
 
       &:disabled {
         background: #f5f5f5;
+      }
+
+      ::placeholder {
+        font-size: 16px;
       }
     }
 
@@ -42,10 +49,13 @@ export const Container = styled.div`
         display: flex;
         flex: 1;
         flex-direction: column;
-        margin-right: 16px;
+
+        &:first-child {
+          margin-right: 16px;
+        }
 
         &:last-child {
-          margin-right: 0;
+          margin-right: 16px;
         }
       }
     }
@@ -69,20 +79,20 @@ export const Header = styled.header`
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding: 0 8px;
-      height: 36px;
-      width: 112px;
       border-radius: 4px;
-      color: #fff;
+      width: 112px;
+      height: 36px;
+      padding: 0 8px;
       font-weight: bold;
+      color: #fff;
       transition: background 0.2s;
 
       &:first-child {
-        background: #ccc;
+        background: #cccccc;
         margin-right: 16px;
 
         &:hover {
-          background: ${darken(0.06, '#ccc')};
+          background: ${darken(0.06, '#cccccc')};
         }
       }
 
@@ -93,6 +103,34 @@ export const Header = styled.header`
           background: ${darken(0.06, '#ee4d64')};
         }
       }
+    }
+  }
+`;
+
+export const StudentPicker = styled(MySelect)`
+  margin-top: 8px;
+  font-size: 16px;
+
+  .react-select__control {
+    max-height: 45px;
+    display: flex;
+    align-items: initial;
+    .react-select__value-container {
+      padding-right: 730px;
+      input {
+        height: auto;
+      }
+    }
+  }
+`;
+
+export const PlanPicker = styled(MySelect)`
+  margin-top: 8px;
+  font-size: 16px;
+  .react-select__control {
+    border: 1px solid #dddddd;
+    .react-select__value-container {
+      height: 43px;
     }
   }
 `;

@@ -9,7 +9,6 @@ export const Container = styled.div`
     margin-top: 24px;
     display: flex;
     flex-direction: column;
-    height: 307px;
     background: #fff;
     padding: 10px 30px 30px 30px;
     border-radius: 4px;
@@ -26,6 +25,11 @@ export const Container = styled.div`
       border: solid 1px #ddd;
       border-radius: 4px;
       font-size: 16px;
+    }
+
+    span {
+      margin: 5px 3px 0;
+      color: #dc143c;
     }
 
     & > div {

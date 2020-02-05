@@ -3,11 +3,24 @@ import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
+import * as Yup from 'yup';
+
 import api from '~/services/api';
 import history from '~/services/history';
+
 import { Container, Header } from './styles';
 
 import CurrencyInput from '~/components/CurrencyInput';
+
+const schema = Yup.object().shape({
+  title: Yup.string().required('Título é obrigatório'),
+  duration: Yup.number()
+    .typeError('Valor inválido')
+    .required('Duração é obrigatório'),
+  price: Yup.number()
+    .typeError('Valor inválido')
+    .required('Preço é obrigatório'),
+});
 
 export default function FormPlan({ match }) {
   const { id } = match.params;
@@ -36,7 +49,6 @@ export default function FormPlan({ match }) {
     if (id) {
       try {
         await api.put(`/plans/${id}`, data);
-
         toast.success('Plano editado com sucesso!');
 
         history.push('/plans');
@@ -89,7 +101,12 @@ export default function FormPlan({ match }) {
         </div>
       </Header>
 
-      <Form onSubmit={handleSubmit} initialData={plan} id="form">
+      <Form
+        onSubmit={handleSubmit}
+        initialData={plan}
+        schema={schema}
+        id="form"
+      >
         <strong>TÍTULO DO PLANO</strong>
         <Input name="title" type="text" />
 

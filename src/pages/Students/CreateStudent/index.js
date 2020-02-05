@@ -2,10 +2,28 @@ import React from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+
 import history from '~/services/history';
 import api from '~/services/api';
 
 import { Container, Header } from './styles';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('Nome é obrigatório'),
+  email: Yup.string()
+    .email('Insira um e-mail válido')
+    .required('E-mail é obrigatório'),
+  age: Yup.number()
+    .typeError('Valor inválido')
+    .required('Idade é obrigatório'),
+  weight: Yup.number()
+    .typeError('Valor inválido')
+    .required('Peso é obrigatório'),
+  height: Yup.number()
+    .typeError('Valor inválido')
+    .required('Altura é obrigatório'),
+});
 
 export default function CreateStudent() {
   async function handleSubmit(data) {
@@ -37,7 +55,7 @@ export default function CreateStudent() {
         </div>
       </Header>
 
-      <Form onSubmit={handleSubmit} id="form">
+      <Form onSubmit={handleSubmit} id="form" schema={schema}>
         <strong>NOME COMPLETO</strong>
         <Input name="name" type="text" placeholder="Gustavo Nobrega" />
         <strong>ENDEREÇO DE E-MAIL</strong>
