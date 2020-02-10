@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <img src="src/assets/images/logo.svg" alt="Gympoint" width="200px">
+  <img src="src/assets/logo.svg" alt="Gympoint" width="200px">
 <br>
 <br>
 Gympoint - frontend
